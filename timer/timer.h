@@ -2,6 +2,9 @@
 #include "../led/led.h"
 #include "../joystick/joystick.h"
 
+#ifndef __TIMER_H
+#define __TIMER_H
+
 #define TIM_MS_TO_TICKS(MS, PR, FREQ_HZ) ((uint32_t)(((uint64_t)(MS)) * (FREQ_HZ/1000) / ((PR)+1)))
 #define TIM_MS_TO_TICKS_SIMPLE(MS) TIM_MS_TO_TICKS((MS), 0, 25000000)
 
@@ -57,6 +60,7 @@ void TIMER1_IRQHandler (void);
 void TIMER2_IRQHandler (void);
 void TIMER3_IRQHandler (void);
 
+#endif
 /*****************************************************************************
 **                            End Of File
 ******************************************************************************/
