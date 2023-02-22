@@ -60,10 +60,10 @@ nome_molto_lungo_e_complicato			proc
 
 loop			ldr r7, [r0], #4				; load first vett val (post increment r0)
 												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, change #4 -> #2 
+												;  - change ldr -> ldrb, change #4 -> #1
 				ldr r8, [r0], #4				; load second vett val (post increment r0)
 												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, change #4 -> #2 
+												;  - change ldr -> ldrb, change #4 -> #1
 
 				; logic here
 				
