@@ -1,3 +1,6 @@
+#ifndef __JOYSTICK_H
+#define __JOYSTICK_H
+
 #include "lpc17xx.h"
 #include "../led/led.h"
 
@@ -19,3 +22,5 @@ int joystick_check_dir(uint32_t);
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/
+
+#endif // __JOYSTICK_H
