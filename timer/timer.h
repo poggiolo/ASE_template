@@ -2,8 +2,8 @@
 #include "../led/led.h"
 #include "../joystick/joystick.h"
 
-#define TIM_MS_TO_TICKS(MS, PR, FREQ) ((uint32_t)(((uint64_t)(MS)) * (FREQ) / ((PR)+1)))
-#define TIM_MS_TO_TICKS_SIMPLE(MS) TIM_MS_TO_TICKS((MS), 0, 25000)
+#define TIM_MS_TO_TICKS(MS, PR, FREQ_HZ) ((uint32_t)(((uint64_t)(MS)) * (FREQ_HZ/1000) / ((PR)+1)))
+#define TIM_MS_TO_TICKS_SIMPLE(MS) TIM_MS_TO_TICKS((MS), 0, 25000000)
 
 #define TIMER_INTERRUPT_MR 1
 #define TIMER_RESET_MR 2
