@@ -1,0 +1,80 @@
+MRS <Rn>, <Sreg>
+Copies a special regsiter into a register
+
+MSR <Sreg>, <Rn>
+Copies a general purpose register into a special register
+
+CMP <Rd>, <operand2>
+Subtracts operand2f rom Rd and updates the flag
+second operand can be a register with optional shit or a constant 
+
+TST <Rd>, <operand2>
+Computes the logical and between operand2 and Rd and updates the flag
+
+# Flags are affected onlu if the suffix 'S' is appended to the instruction
+
+ALU
+
+ADD <Rd>, <Rn>, <Op2>
+SUB
+UDIV
+SDIV
+AND
+ORR
+XOR
+NOT <Rd>, <Rn>
+
+LSL
+LSR
+ROR
+
+MOV to move data between registers
+
+MOV <Rd>, #<constant> (16 bits)
+MOV <Rd>, <Rm> {, shift}
+
+shift can be
+
+LSL #n (logical shift left)
+LSR #n (logical shift right)
+
+LDR{_, B, H} <Rd>, <addressing_mode>
+
+To load constant
+
+addressing_mode can be
+
+[<Rn>, <offset>]{!}
+
+if you add !, Rs is updated after the access
+
+you can assign other names to registers with RN
+name RN registerIndex
+
+You can give a symbolic name to a numeric constant
+name EQU expression
+
+to declare constant, you can use DCB, DCW, DCD
+
+B	to branch <label>
+BX 	to branch a register
+BL 	to branch and link <label>
+BLX to branch and link a register
+
+conditional operations based on flags:
+
+EQ	        Z = 1	                Equal
+NE	        Z = 0	                Not equal
+CS or HS	C = 1	                Higher or same, unsigned
+CC or LO	C = 0	                Lower, unsigned
+MI	        N = 1	                Negative
+PL	        N = 0	                Positive or zero
+VS	        V = 1	                Overflow
+VC	        V = 0	                No overflow
+HI	        C = 1 and Z = 0	        Higher, unsigned
+LS	        C = 0 or Z = 1	        Lower or same, unsigned
+GE	        N = V	                Greater than or equal, signed
+LT	        N != V	                Less than, signed
+GT	        Z = 0 and N = V	        Greater than, signed
+LE	        Z = 1 and N != V        Less than or equal, signed
+AL	        Can have any value	    Always. This is the default when no suffix is specified.
