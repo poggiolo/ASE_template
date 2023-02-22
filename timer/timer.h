@@ -17,12 +17,6 @@
 #define TIMER_2 2
 #define TIMER_3 3
 
-#define PRIO_0 0
-#define PRIO_1 1
-#define PRIO_2 2
-#define PRIO_3 3
-#define PRIO_4 4
-#define PRIO_5 5
 
 #define IR_MR0 1
 #define IR_MR1 2
