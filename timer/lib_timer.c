@@ -58,7 +58,7 @@ void init_timer_pwm(uint8_t timer_n, float duty, uint32_t period_ms) {
 	init_timer_simplified(timer_n, 0, duty*mr1, mr1, TIMER_INTERRUPT_MR, TIMER_INTERRUPT_MR|TIMER_RESET_MR); 
 }
 
-void init_timer_simplified(int timer_n, int prescale, int mr0, int mr1, int conf_mr0, int conf_mr1){
+void init_timer_simplified(uint8_t timer_n, uint32_t prescale, uint32_t mr0, uint32_t mr1, uint8_t conf_mr0, uint8_t conf_mr1){
 	struct timer_configuration tm; 
 	
 	tm.timer_n = timer_n;
