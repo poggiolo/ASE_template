@@ -2,7 +2,7 @@
 #include "common.h"
 
 #define N 8
-#define RIT_PERIOD_MS 50
+#define RIT_PERIOD_MS 50U
 
 typedef enum {
 	STATE_IDLE,
@@ -69,7 +69,7 @@ int main (void) {
 	
 	// init_timer_simplified(TIMER_0, prescale, mr0, mr1, conf_mr0, conf_mr1); enable_timer(TIMER_0, PRIO_3);
 	
-	// init_timer_pwm(TIMER_0, 0.5, 170000); enable_timer(TIMER_0, PRIO_3);
+	// init_timer_pwm(TIMER_0, 0.5, 170000U); enable_timer(TIMER_0, PRIO_3);
 	
 	// ADC_init();
 	
