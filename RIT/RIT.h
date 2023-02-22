@@ -1,10 +1,9 @@
+#ifndef __RIT_H
+#define __RIT_H
+
 #include "lpc17xx.h"
 #include "../led/led.h"
 #include  "../timer/timer.h"
-
-
-#ifndef __RIT_H
-#define __RIT_H
 
 /**
 * @brief return ticks for the RIT timer initialization give milliseconds

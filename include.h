@@ -1,3 +1,6 @@
+#ifndef __INCLUDE_H
+#define __INCLUDE_H
+
 #include <stdio.h>
 #include "LPC17xx.H"                    /* LPC17xx definitions                */
 #include "led/led.h"
@@ -17,3 +20,5 @@
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/
+
+#endif // __INCLUDE_H
