@@ -70,9 +70,11 @@ int main (void) {
 	// init_timer_pwm(TIMER_0, 0.5, 170000); enable_timer(TIMER_0, PRIO_3);
 	
 	ADC_init();
-
-	LPC_SC->PCON |= 0x1;
-	LPC_SC->PCON &= 0xFFFFFFFFD;
+	
+	// power control register
+	LPC_SC->PCON |= 0x1;		// PM0=1
+	LPC_SC->PCON &= 0xFFFFFFFFD;	// PM1=0
+	//execution of wfi or wfe assembly enters Power-Down mode when SLEEPDEEP is on
 	
 	// call asm function
 	// nome_molto_lungo_e_complicato(VETT, N);
