@@ -1,8 +1,17 @@
 #include "lpc17xx.h"
 #include "../led/led.h"
+#include  "../timer/timer.h"
+
 
 #ifndef __RIT_H
 #define __RIT_H
+
+/**
+* @brief return ticks for the RIT timer initialization give milliseconds
+* @param MS RIT period in milliseconds
+* @note base frequency of RIT is 100MHz
+*/
+#define RIT_MS_TO_TICKS(MS) TIM_MS_TO_TICKS(MS, 0, 100000000)
 
 extern uint32_t init_RIT( uint32_t RITInterval );
 extern void enable_RIT( void );

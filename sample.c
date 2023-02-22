@@ -2,6 +2,7 @@
 #include "common.h"
 
 #define N 8
+#define RIT_PERIOD_MS 50
 
 typedef enum {
 	STATE_IDLE,
@@ -43,7 +44,7 @@ int main (void) {
 	// RIT WORKS WITH CLOCK = 100MHZ
 	// ONE INTERRUPT EACH 50ms
 	
-	init_RIT(0x004C4B40); enable_RIT();
+	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS)); enable_RIT();
 	
 	//	init_timer_simplified:
 	//		1: which timer
