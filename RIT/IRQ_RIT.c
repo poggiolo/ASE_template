@@ -132,7 +132,7 @@ void RIT_IRQHandler(void){
 	// ADC Conversion
 	// -------------------------------
 	
-	ADC_start_conversion();
+	// ADC_start_conversion();
 	
 	LPC_RIT->RICTRL |= 0x1;
 }

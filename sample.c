@@ -31,7 +31,6 @@ int main (void) {
 	LED_init();
 	
 	// LCD_Initialization();
-	joystick_init();
 	
 	// BUTTON_init:
 	//		1: which button
@@ -40,6 +39,8 @@ int main (void) {
 	BUTTON_init(BUTTON_0, PRIO_3);
 	BUTTON_init(BUTTON_1, PRIO_3);
 	BUTTON_init(BUTTON_2, PRIO_3);
+	
+	joystick_init();
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	// ONE INTERRUPT EACH 50ms
@@ -70,7 +71,7 @@ int main (void) {
 	
 	// init_timer_pwm(TIMER_0, 0.5, 170000); enable_timer(TIMER_0, PRIO_3);
 	
-	ADC_init();
+	// ADC_init();
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;		// PM0=1
