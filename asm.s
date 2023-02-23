@@ -54,21 +54,24 @@ nome_molto_lungo_e_complicato			proc
 				;	6th parameter
 				;	ldr r5, [r12, #4]
 				
-				add r6, r0, r1, LSL #2 			; get loop stop condition
-												; remove ",LSL #2" if VETT is an array of char (bytes)
-				
+				subs r1, r1, #1
+				blt exit
 
-loop			ldr r7, [r0], #4				; load first vett val (post increment r0)
+loop			ldr r7, [r0, r1, LSL #2]		; load first vett val
 												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, change #4 -> #1
-				ldr r8, [r0], #4				; load second vett val (post increment r0)
+												;  - change ldr -> ldrb, remove LSL #2
+				
+				; subs r1, #1					; update r1
+				; blt exit						; if not sure N is even
+				
+				; ldr r8, [r0, r1, LSL #2]		; load second vett val
 												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, change #4 -> #1
+												;  - change ldr -> ldrb, remove LSL #2
 
 				; logic here
 				
-				subs r10, r0, r6				; exit condition
-				bne loop
+				subs r1, r1, #1					; exit condition
+				bge loop
 				
 exit			; put return value into r0
 				; mov r0, #0
