@@ -59,14 +59,18 @@ nome_molto_lungo_e_complicato			proc
 
 loop			ldr r7, [r0, r1, LSL #2]		; load first vett val
 												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, remove LSL #2
+												;  - change ldr -> ldrb, remove LSL #2 (aka *4)
+                                                                                                ; if VETT is an array of in16
+                                                                                                ;  - change ldr -> ldrh, LSL #2 -> LSL#1 (aka *2)
 				
 				; subs r1, #1					; update r1
 				; blt exit						; if not sure N is even
 				
 				; ldr r8, [r0, r1, LSL #2]		; load second vett val
 												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, remove LSL #2
+												;  - change ldr -> ldrb, remove LSL #2 (aka *4)
+                                                                                                ; if VETT is an array of int16
+                                                                                                ;  - change ldr -> ldrh, LSL #2 -> LSL #1 (aka *2)
 
 				; logic here
 				
