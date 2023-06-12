@@ -54,7 +54,7 @@ void LED_Out(unsigned int value) {
 void LED_Out_Range(unsigned int value, uint8_t from_led_num, uint8_t to_led_num){
 	int i;
 	int j;
-	if (to_led_num <= from_led_num || to_led_num > LED_NUM) return;
+	if (to_led_num < from_led_num || to_led_num >= LED_NUM) return;
 	
   for (i = from_led_num, j=0; i <= to_led_num; i++,j++) {
     if (value & (1<<j)) {
