@@ -5,7 +5,7 @@
 #define RIT_PERIOD_MS 50U
 
 // Private Variables
-static volatile uint32_t DelayTimerTick = 0;
+static volatile uint32_t Sys_Tick = 0;
 
 // Local Global Variables
 uint32_t VETT[N];
@@ -149,10 +149,14 @@ static void InitSysTick(void){
 }
 /* SysTick Interrupt Handler */
 void SysTick_Handler(void){
-	if (DelayTimerTick<0xFFFFFFFF) { DelayTimerTick++; } /* increment timer */
+	Sys_Tick++; /* increment timer */
 }
 /* Delay Function based on SysTick Counter */
 void Delay_SysTick(uint32_t SysTicks){
-	DelayTimerTick = 0; /* reset timer value */
-	while(DelayTimerTick < SysTicks); /* wait for timer */
+	uint32_t DelayTimer_SysTick = Sys_GetTick() + SysTicks; /* Get End Tick */
+	while(Sys_GetTick() < DelayTimer_SysTick); 				/* wait for timer */
+}
+/*Get Current Elapsed Ticks*/
+uint32_t Sys_GetTick(void){
+	return Sys_Tick;
 }
