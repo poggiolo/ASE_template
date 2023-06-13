@@ -24,6 +24,9 @@ ORR
 XOR
 NOT <Rd>, <Rn>
 
+MUL <Rd>, <Rn1>, <Rn2> # Can't do immediate
+SMUL                   # Signed multiply
+
 LSL
 LSR
 ROR

@@ -4,30 +4,38 @@
 #define N 8
 #define RIT_PERIOD_MS 50U
 
-typedef enum {
-	STATE_IDLE,
-	STATE_RESET
-} state_t;
+// Private Variables
+static volatile uint32_t DelayTimerTick = 0;
 
+// Local Global Variables
+uint32_t VETT[N];
+
+// Local Functions Prototypes
+static void InitSysTick(void);
+void SysTick_Handler(void);
+void Delay_SysTick(uint32_t SysTicks);
+
+// Exported variables
+volatile state_t state;
+
+// Imported Functions
 extern void nome_molto_lungo_e_complicato(uint32_t VETT[], uint32_t n);
 
+// Imported Variables
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
-state_t state;
-uint32_t VETT[N];
 
 int main (void) {
+	// Imperative Inits
 	SystemInit();
+	InitSysTick();
 	
-	// AAA: SET DEBUG ON THE BOARD
-	// AAA: ADD TO WATCH THE GLOBAL VARIABLES USED
-	// AAA: ADD THE BREAKPOINTS WHERE YOU PERFROM SOME ACTIONS
-	// AAA: ADD THE BREAKPOINTS TO THE BEGINNING OF ASM
-	
+	// Initialize Variables
 	state = STATE_IDLE;
 	memset(VETT, 0, sizeof(VETT));
 	
+	// Other peripherals Init
 	LED_init();
 	
 	// LCD_Initialization();
@@ -74,7 +82,7 @@ int main (void) {
 	// ADC_init();
 	
 	// power control register
-	LPC_SC->PCON |= 0x1;		// PM0=1
+	LPC_SC->PCON |= 0x1;			// PM0=1
 	LPC_SC->PCON &= 0xFFFFFFFFD;	// PM1=0
 	//execution of wfi or wfe assembly enters Power-Down mode when SLEEPDEEP is on
 	
@@ -122,11 +130,29 @@ int main (void) {
 			btn_flag &= ~FLAG_BUTTON_2;
 		}
 		*/
-		
+
+		/*Finite State Machine*/
+		switch(state){
+			case STATE_IDLE:
+			break;
+			case STATE_RESET:
+			break;
+		}
+
 		__ASM("wfi");
 	}
 }
 
-// ************************
-// END FILE								*
-// ************************
+/* Initialize SysTick using CMSIS Core_CM4 function */
+static void InitSysTick(void){
+	SysTick_Config(SystemFrequency/1000U); /* Configure the SysTick timer */
+}
+/* SysTick Interrupt Handler */
+void SysTick_Handler(void){
+	if (DelayTimerTick<0xFFFFFFFF) { DelayTimerTick++; } /* increment timer */
+}
+/* Delay Function based on SysTick Counter */
+void Delay_SysTick(uint32_t SysTicks){
+	DelayTimerTick = 0; /* reset timer value */
+	while(DelayTimerTick < SysTicks); /* wait for timer */
+}
