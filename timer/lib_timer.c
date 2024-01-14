@@ -59,7 +59,7 @@ void init_timer_pwm(uint8_t timer_n, float duty, uint32_t period_ms) {
 }
 
 void init_timer_simplified(uint8_t timer_n, uint32_t prescale, uint32_t mr0, uint32_t mr1, uint8_t conf_mr0, uint8_t conf_mr1){
-	struct timer_configuration tm; 
+	struct timer_configuration tm = {0}; 
 	
 	tm.timer_n = timer_n;
 	tm.prescale = prescale;
