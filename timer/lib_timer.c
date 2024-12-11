@@ -72,7 +72,7 @@ void init_timer_simplified(uint8_t timer_n, uint32_t prescale, uint32_t mr0, uin
 }
 
 void init_timer (struct timer_configuration* tc){
-	LPC_TIM_TypeDef* timer;
+	LPC_TIM_TypeDef* timer = NULL;
 
 	if (tc->timer_n == TIMER_0){
 		LPC_SC->PCONP |= (1 << 1);

@@ -1,7 +1,7 @@
 #ifndef __BUTTON_H
 #define __BUTTON_H
 
-#include "lpc17xx.h"
+#include "LPC17xx.h"
 #include "../led/led.h"
 
 #define BUTTON_0 0

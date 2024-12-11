@@ -20,6 +20,8 @@ extern unsigned char led_value;
 #define PRIO_4 4U
 #define PRIO_5 5U
 
+#define N 6
+
 typedef enum {
 	STATE_IDLE,
 	STATE_RESET

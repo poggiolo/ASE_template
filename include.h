@@ -2,7 +2,7 @@
 #define __INCLUDE_H
 
 #include <stdio.h>
-#include "LPC17xx.H"                    /* LPC17xx definitions                */
+#include "LPC17xx.h"                    /* LPC17xx definitions                */
 #include "led/led.h"
 
 #include "button_EXINT/button.h"
