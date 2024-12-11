@@ -1,4 +1,4 @@
-#include "lpc17xx.h"
+#include "LPC17xx.h"
 #include "../led/led.h"
 #include "../joystick/joystick.h"
 #include <stdio.h>

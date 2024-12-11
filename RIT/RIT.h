@@ -1,7 +1,7 @@
 #ifndef __RIT_H
 #define __RIT_H
 
-#include "lpc17xx.h"
+#include "LPC17xx.h"
 #include "../led/led.h"
 #include  "../timer/timer.h"
 

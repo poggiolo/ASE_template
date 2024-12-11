@@ -1,7 +1,7 @@
 #ifndef __JOYSTICK_H
 #define __JOYSTICK_H
 
-#include "lpc17xx.h"
+#include "LPC17xx.h"
 #include "../led/led.h"
 
 #define JOYSTICK_UP 29

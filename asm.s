@@ -2,30 +2,7 @@
 					
 ; 	C-code of the ASM function
 ;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
+
 
 ; convenient register renaming
 name0 RN 0
@@ -41,27 +18,28 @@ name9 RN 9
 
 ; NB append S to any instruction in order to update the flags
 
-nome_molto_lungo_e_complicato			proc
-                export  nome_molto_lungo_e_complicato
+ASM_func			proc
+                export  ASM_func
 				
 				; r12: value of the stack before the push
 				; mov  r12, sp
 				
-				push {r4-r8, r10-r11, lr}
+				push {r4-r8, r10-r11, lr} ; save volatile registers
 				
 				;	5th paramenter
 				;	ldr r4, [r12]
 				;	6th parameter
 				;	ldr r5, [r12, #4]
 				
+				;mov , #0
 				subs r1, r1, #1
 				blt exit
 
-loop			ldr r7, [r0, r1, LSL #2]		; load first vett val
-												; if VETT is an array of char (bytes)
-												;  - change ldr -> ldrb, remove LSL #2 (aka *4)
-                                                                                                ; if VETT is an array of in16
-                                                                                                ;  - change ldr -> ldrh, LSL #2 -> LSL#1 (aka *2)
+loop			ldr r7, [r0, r1, LSL #2]		; load first vett val (NB: arm registers 0x00000000, 4 byte)
+				;ldrb r7, [r0, r1]				; if VETT is an array of char (bytes)
+				;ldrh r7, [r0, r1, LSL #1]		;  - change ldr -> ldrb, remove LSL #2 (aka *4)
+                                                ; if VETT is an array of int16
+                                                ;  - change ldr -> ldrh, LSL #2 -> LSL#1 (aka *2)
 				
 				; subs r1, #1					; update r1
 				; blt exit						; if not sure N is even
@@ -69,8 +47,8 @@ loop			ldr r7, [r0, r1, LSL #2]		; load first vett val
 				; ldr r8, [r0, r1, LSL #2]		; load second vett val
 												; if VETT is an array of char (bytes)
 												;  - change ldr -> ldrb, remove LSL #2 (aka *4)
-                                                                                                ; if VETT is an array of int16
-                                                                                                ;  - change ldr -> ldrh, LSL #2 -> LSL #1 (aka *2)
+                                                ; if VETT is an array of int16
+                                                ;  - change ldr -> ldrh, LSL #2 -> LSL #1 (aka *2)
 
 				; logic here
 				
@@ -88,3 +66,5 @@ exit			; put return value into r0
 ;******************************************************************************
 ;**                            End Of File
 ;******************************************************************************
+
+

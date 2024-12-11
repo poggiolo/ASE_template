@@ -1,14 +1,11 @@
 #include "include.h"
 #include "common.h"
 
-#define N 8
+//#define N 8 see common.h
 #define RIT_PERIOD_MS 50U
 
 // Private Variables
 static volatile uint32_t Sys_Tick = 0;
-
-// Local Global Variables
-uint32_t VETT[N];
 
 // Local Functions Prototypes
 static void InitSysTick(void);
@@ -18,13 +15,17 @@ void Delay_SysTick(uint32_t SysTicks);
 // Exported variables
 volatile state_t state;
 
-// Imported Functions
-extern void nome_molto_lungo_e_complicato(uint32_t VETT[], uint32_t n);
-
 // Imported Variables
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
+// Imported Functions
+extern void ASM_func(uint32_t VETT[], uint32_t n);
+
+// Local Global Variables
+uint32_t VETT[N];
+uint32_t i;
+uint32_t VAR;
 
 int main (void) {
 	// Imperative Inits
@@ -34,11 +35,14 @@ int main (void) {
 	// Initialize Variables
 	state = STATE_IDLE;
 	memset(VETT, 0, sizeof(VETT));
+	i = 0;
+	VAR = 0;
 	
 	// Other peripherals Init
 	LED_init();
-	
-	// LCD_Initialization();
+	joystick_init();
+	//LCD_Initialization();
+	//ADC_init();
 	
 	// BUTTON_init:
 	//		1: which button
@@ -48,13 +52,12 @@ int main (void) {
 	BUTTON_init(BUTTON_1, PRIO_3);
 	BUTTON_init(BUTTON_2, PRIO_3);
 	
-	joystick_init();
-	
 	// RIT WORKS WITH CLOCK = 100MHZ
-	// ONE INTERRUPT EACH 50ms
+	// ONE INTERRUPT EVERY 50ms
 	
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS)); enable_RIT();
 	
+	/* TIMER INSTRUCTIONS
 	//	init_timer_simplified:
 	//		1: which timer
 	// 		2: prescaler
@@ -74,12 +77,13 @@ int main (void) {
 	// USE TIM_MS_TO_TICKS_SIMPLE for default PR (=0) and f_timer_hz values
 	// use TIM_MS_TO_TICKS for custom PR and f_timer_hz values
 	// max ms value is 170000 (2min 50s) => TIM_MS_TO_TICKS_SIMPLE(170000)=2^31-1
-	
+	*/
 	// init_timer_simplified(TIMER_0, prescale, mr0, mr1, conf_mr0, conf_mr1); enable_timer(TIMER_0, PRIO_3);
 	
 	// init_timer_pwm(TIMER_0, 0.5, 170000U); enable_timer(TIMER_0, PRIO_3);
 	
-	// ADC_init();
+	init_timer_simplified(TIMER_0, 0, TIM_MS_TO_TICKS_SIMPLE(1000), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
+	enable_timer(TIMER_0, PRIO_3);
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
@@ -87,10 +91,23 @@ int main (void) {
 	//execution of wfi or wfe assembly enters Power-Down mode when SLEEPDEEP is on
 	
 	// call asm function
-	// nome_molto_lungo_e_complicato(VETT, N);
-		
+	// ASM_func(VETT, N);
+	
 	while (1) {
-		/*
+		
+		/*Finite State Machine*/
+		switch(state){
+			case STATE_IDLE:
+			break;
+			case STATE_RESET:
+			break;
+		}
+
+		__ASM("wfi");
+	}
+}
+/*
+		// Joystick cmd, flags set at first edge
 		if(joystick_flag & FLAG_JOYSTICK_UP) {
 			joystick_flag &= ~FLAG_JOYSTICK_UP;
 		}
@@ -115,6 +132,7 @@ int main (void) {
 			joystick_flag &= ~FLAG_JOYSTICK_SELECT;
 		}
 		*/
+		// Buttons, flags set when released
 		/*
 		if(btn_flag & FLAG_BUTTON_0) {
 			btn_flag &= ~FLAG_BUTTON_0;
@@ -130,18 +148,6 @@ int main (void) {
 			btn_flag &= ~FLAG_BUTTON_2;
 		}
 		*/
-
-		/*Finite State Machine*/
-		switch(state){
-			case STATE_IDLE:
-			break;
-			case STATE_RESET:
-			break;
-		}
-
-		__ASM("wfi");
-	}
-}
 
 /* Initialize SysTick using CMSIS Core_CM4 function */
 static void InitSysTick(void){
