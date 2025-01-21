@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>LandTiget_LPC1768 (release)</TargetName>
+    <TargetName>LandTiger_LPC1768 (release)</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
