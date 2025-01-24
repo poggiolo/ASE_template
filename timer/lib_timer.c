@@ -227,32 +227,84 @@ void init_repetitive_timer (struct repetitive_timer_configuration* tm, timer_cal
 	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
 */
 
-void TIMER_IRQHandler (void){
+void TIMER0_IRQHandler (void){
 	uint8_t irq_source;
-  for (int i = 0; i < 4; i++) {
-    if 			(i == 0) irq_source = LPC_TIM0->IR;
-    else if (i == 1) irq_source = LPC_TIM1->IR;
-    else if (i == 2) irq_source = LPC_TIM2->IR;
-    else if (i == 3) irq_source = LPC_TIM3->IR;
-    
-    if (irq_source) {
-			if(timers_info[i].max_count != 0){
-				if (irq_source & IR_MR0) {
-					timers_info[i].count++;
-					if (timers_info[i].count >= timers_info[i].max_count) {
-						disable_timer(i);
-					}
+	irq_source = LPC_TIM0->IR;
+	
+	if (irq_source) {
+		if(timers_info[0].max_count != 0){
+			if (irq_source & IR_MR0) {
+				timers_info[0].count++;
+				if (timers_info[0].count >= timers_info[0].max_count) {
+					disable_timer(0);
 				}
 			}
-			if (timers_info[i].callback) timers_info[i].callback(irq_source);
+		}
+		if (timers_info[0].callback) timers_info[0].callback(irq_source);
+	}
+	// Reset IRQ Flag
+	LPC_TIM0->IR = irq_source;
+	return;
+}
 
-			// Reset IRQ Flag
-			if 			(i == 0) LPC_TIM0->IR = irq_source;
-			else if (i == 1) LPC_TIM1->IR = irq_source;
-			else if (i == 2) LPC_TIM2->IR = irq_source;
-			else if (i == 3) LPC_TIM3->IR = irq_source;
-    }
-  }
+void TIMER1_IRQHandler (void){
+	uint8_t irq_source;
+	irq_source = LPC_TIM1->IR;
+	
+	if (irq_source) {
+		if(timers_info[1].max_count != 0){
+			if (irq_source & IR_MR0) {
+				timers_info[1].count++;
+				if (timers_info[1].count >= timers_info[1].max_count) {
+					disable_timer(1);
+				}
+			}
+		}
+		if (timers_info[1].callback) timers_info[1].callback(irq_source);
+	}
+	// Reset IRQ Flag
+	LPC_TIM1->IR = irq_source;
+	return;
+}
+
+void TIMER2_IRQHandler (void){
+	uint8_t irq_source;
+	irq_source = LPC_TIM2->IR;
+	
+	if (irq_source) {
+		if(timers_info[2].max_count != 0){
+			if (irq_source & IR_MR0) {
+				timers_info[2].count++;
+				if (timers_info[2].count >= timers_info[2].max_count) {
+					disable_timer(2);
+				}
+			}
+		}
+		if (timers_info[2].callback) timers_info[2].callback(irq_source);
+	}
+	// Reset IRQ Flag
+	LPC_TIM2->IR = irq_source;
+	return;
+}
+
+void TIMER3_IRQHandler (void){
+	uint8_t irq_source;
+	irq_source = LPC_TIM3->IR;
+	
+	if (irq_source) {
+		if(timers_info[3].max_count != 0){
+			if (irq_source & IR_MR0) {
+				timers_info[3].count++;
+				if (timers_info[3].count >= timers_info[3].max_count) {
+					disable_timer(3);
+				}
+			}
+		}
+		if (timers_info[3].callback) timers_info[3].callback(irq_source);
+	}
+	// Reset IRQ Flag
+	LPC_TIM3->IR = irq_source;
+	return;
 }
 
 
