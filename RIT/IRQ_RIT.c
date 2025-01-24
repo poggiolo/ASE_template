@@ -10,11 +10,11 @@ volatile uint32_t pressed_button_0 = 0;
 volatile uint32_t pressed_button_1 = 0;
 volatile uint32_t pressed_button_2 = 0;
 
-uint32_t pressed_joystick_up     = 0;
-uint32_t pressed_joystick_left   = 0;
-uint32_t pressed_joystick_right  = 0;
-uint32_t pressed_joystick_down   = 0;
-uint32_t pressed_joystick_select = 0;
+volatile uint32_t pressed_joystick_up     = 0;
+volatile uint32_t pressed_joystick_left   = 0;
+volatile uint32_t pressed_joystick_right  = 0;
+volatile uint32_t pressed_joystick_down   = 0;
+volatile uint32_t pressed_joystick_select = 0;
 
 volatile uint8_t joystick_flag = 0;
 volatile uint8_t btn_flag = 0;
