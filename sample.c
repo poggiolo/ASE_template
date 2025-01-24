@@ -1,8 +1,6 @@
 #include "include.h"
 #include "common.h"
 
-#define RIT_PERIOD_MS 50U
-
 // Private Variables
 static volatile uint32_t Sys_Tick = 0;
 
@@ -115,6 +113,34 @@ int main (void) {
 		__ASM("wfi");
 	}
 }
+
+/*
+		if(btn_flag & FLAG_BUTTON_0_SHORT) {
+			btn_flag &= ~FLAG_BUTTON_0_SHORT;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_0_LONG) {
+			btn_flag &= ~FLAG_BUTTON_0_LONG;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_1_SHORT) {
+			btn_flag &= ~FLAG_BUTTON_1_SHORT;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_1_LONG) {
+			btn_flag &= ~FLAG_BUTTON_1_LONG;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_2_SHORT) {
+			btn_flag &= ~FLAG_BUTTON_2_SHORT;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_2_LONG) {
+			btn_flag &= ~FLAG_BUTTON_2_LONG;
+			// do stuff
+		}
+*/
+
 /*
 		// Joystick cmd, flags set at first edge
 		if(joystick_flag & FLAG_JOYSTICK_UP) {
