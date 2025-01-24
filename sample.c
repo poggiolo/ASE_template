@@ -13,8 +13,8 @@ void Delay_SysTick(uint32_t SysTicks);
 volatile state_t state;
 
 // Imported Variables
-extern uint8_t joystick_flag;
-extern uint8_t btn_flag;
+extern volatile uint8_t joystick_flag;
+extern volatile uint8_t btn_flag;
 
 // Imported Functions
 extern void ASM_func(uint32_t VETT[], uint32_t n);

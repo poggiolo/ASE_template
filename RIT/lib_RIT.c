@@ -10,18 +10,18 @@
 #include "LPC17xx.h"
 #include "RIT.h"
 
-extern uint32_t pressed_button_0;
-extern uint32_t pressed_button_1;
-extern uint32_t pressed_button_2;
+extern volatile uint32_t pressed_button_0;
+extern volatile uint32_t pressed_button_1;
+extern volatile uint32_t pressed_button_2;
 
-extern uint32_t pressed_joystick_up;
-extern uint32_t pressed_joystick_left;
-extern uint32_t pressed_joystick_right;
-extern uint32_t pressed_joystick_down;
-extern uint32_t pressed_joystick_select;
+extern volatile uint32_t pressed_joystick_up;
+extern volatile uint32_t pressed_joystick_left;
+extern volatile uint32_t pressed_joystick_right;
+extern volatile uint32_t pressed_joystick_down;
+extern volatile uint32_t pressed_joystick_select;
 
-extern uint8_t joystick_flag;
-extern uint8_t btn_flag;
+extern volatile uint8_t joystick_flag;
+extern volatile uint8_t btn_flag;
 
 /******************************************************************************
 ** Function name:		enable_RIT
