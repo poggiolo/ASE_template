@@ -1,9 +1,6 @@
 #include "include.h"
 #include "common.h"
 
-//#define N 8 see common.h
-#define RIT_PERIOD_MS 50U
-
 // Private Variables
 static volatile uint32_t Sys_Tick = 0;
 
@@ -21,7 +18,7 @@ extern uint8_t btn_flag;
 
 // Imported Functions
 extern void ASM_func(uint32_t VETT[], uint32_t n);
-
+	
 // Local Global Variables
 uint32_t VETT[N];
 uint32_t i;
@@ -79,11 +76,21 @@ int main (void) {
 	// max ms value is 170000 (2min 50s) => TIM_MS_TO_TICKS_SIMPLE(170000)=2^31-1
 	*/
 	// init_timer_simplified(TIMER_0, prescale, mr0, mr1, conf_mr0, conf_mr1); enable_timer(TIMER_0, PRIO_3);
+		
+	//init_timer_simplified(TIMER_0, 0, TIM_MS_TO_TICKS_SIMPLE(1000), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR | TIMER_STOP_MR, 0, timer0_callback);
+	//enable_timer(TIMER_0, PRIO_3);
 	
-	// init_timer_pwm(TIMER_0, 0.5, 170000U); enable_timer(TIMER_0, PRIO_3);
+	/* Example: do stuff every 500ms ms for 10000ms */
+	//init_repetitive_timer_simplified(TIMER_1, 0, TIM_MS_TO_TICKS_SIMPLE(500), 10000, timer1_callback);
+	//enable_timer(1, PRIO_3);
 	
-	init_timer_simplified(TIMER_0, 0, TIM_MS_TO_TICKS_SIMPLE(1000), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
-	enable_timer(TIMER_0, PRIO_3);
+	/* Example: LEDs on for 250ms and off for 750ms */
+	//init_infinite_timer_pwm(2, 0.25, 1000, timer2s_callback);
+	//enable_timer(2, PRIO_3);
+	
+	/* Example: LEDs on for 250ms and off for 750ms for 10000ms  */
+	//init_finite_timer_pwm(3, 0.25, 1000, 10000, timer3_callback);
+	//enable_timer(3, PRIO_3);
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
@@ -92,7 +99,7 @@ int main (void) {
 	
 	// call asm function
 	// ASM_func(VETT, N);
-	
+			
 	while (1) {
 		
 		/*Finite State Machine*/
@@ -106,6 +113,34 @@ int main (void) {
 		__ASM("wfi");
 	}
 }
+
+/*
+		if(btn_flag & FLAG_BUTTON_0_SHORT) {
+			btn_flag &= ~FLAG_BUTTON_0_SHORT;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_0_LONG) {
+			btn_flag &= ~FLAG_BUTTON_0_LONG;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_1_SHORT) {
+			btn_flag &= ~FLAG_BUTTON_1_SHORT;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_1_LONG) {
+			btn_flag &= ~FLAG_BUTTON_1_LONG;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_2_SHORT) {
+			btn_flag &= ~FLAG_BUTTON_2_SHORT;
+			// do stuff
+		}
+		if(btn_flag & FLAG_BUTTON_2_LONG) {
+			btn_flag &= ~FLAG_BUTTON_2_LONG;
+			// do stuff
+		}
+*/
+
 /*
 		// Joystick cmd, flags set at first edge
 		if(joystick_flag & FLAG_JOYSTICK_UP) {

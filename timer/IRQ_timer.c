@@ -2,77 +2,55 @@
 #include "../common.h"
 
 /*
-	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
+* NOTE: Repetitive timers only in MR0!
 */
 
-void TIMER0_IRQHandler (void){
-	uint8_t irq_source = LPC_TIM0->IR;
+void timer0_callback(uint8_t irq_src){
+	if(irq_src & IR_MR0){
+
+	} else if (irq_src & IR_MR1){
+		
+	} else if (irq_src & IR_MR2) {
 	
-	if(irq_source & IR_MR0) { // mr0
-		
-	} else if(irq_source & IR_MR1) { // mr1
-		
-	} else if(irq_source & IR_MR2) { // mr2
-		
-	} else if(irq_source & IR_MR3) { // mr3
+	} else if (irq_src & IR_MR3){
 		
 	}
-	
-	LPC_TIM0->IR = irq_source;
-	return;
 }
 
+void timer1_callback(uint8_t irq_src){
+	if(irq_src & IR_MR0){
 
-void TIMER1_IRQHandler (void){
-	uint8_t irq_source = LPC_TIM1->IR;
+	} else if (irq_src & IR_MR1){
+		
+	} else if (irq_src & IR_MR2) {
 	
-	if(irq_source & IR_MR0) { // mr0
-		
-	} else if(irq_source & IR_MR1) { // mr1
-		
-	} else if(irq_source & IR_MR2) { // mr2
-		
-	} else if(irq_source & IR_MR3) { // mr3
+	} else if (irq_src & IR_MR3){
 		
 	}
-	
-	LPC_TIM1->IR = irq_source;
-	return;
 }
 
+void timer2_callback(uint8_t irq_src){
+	if(irq_src & IR_MR0){
 
-void TIMER2_IRQHandler(void){
-	uint8_t irq_source = LPC_TIM2->IR;
+	} else if (irq_src & IR_MR1){
+		
+	} else if (irq_src & IR_MR2) {
 	
-	if(irq_source & IR_MR0) { // mr0
-		
-	} else if(irq_source & IR_MR1) { // mr1
-		
-	} else if(irq_source & IR_MR2) { // mr2
-		
-	} else if(irq_source & IR_MR3) { // mr3
+	} else if (irq_src & IR_MR3){
 		
 	}
-	
-	LPC_TIM2->IR = irq_source;
-	return;
 }
 
-void TIMER3_IRQHandler (void){
-	uint8_t irq_source = LPC_TIM3->IR;
+void timer3_callback(uint8_t irq_src){
+	if(irq_src & IR_MR0){
+		
+	} else if (irq_src & IR_MR1){
+
+	} else if (irq_src & IR_MR2) {
 	
-	if(irq_source & IR_MR0) { // mr0
-		
-	} else if(irq_source & IR_MR1) { // mr1
-		
-	} else if(irq_source & IR_MR2) { // mr2
-		
-	} else if(irq_source & IR_MR3) { // mr3
+	} else if (irq_src & IR_MR3){
 		
 	}
-	
-	LPC_TIM3->IR = irq_source;
-	return;
 }
 
 /******************************************************************************

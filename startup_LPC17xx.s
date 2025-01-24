@@ -71,10 +71,10 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
 
                 ; External Interrupts
                 DCD     WDT_IRQHandler            ; 16: Watchdog Timer
-                DCD     TIMER0_IRQHandler         ; 17: Timer0
-                DCD     TIMER1_IRQHandler         ; 18: Timer1
-                DCD     TIMER2_IRQHandler         ; 19: Timer2
-                DCD     TIMER3_IRQHandler         ; 20: Timer3
+                DCD     TIMER_IRQHandler          ; 17: Timer0
+                DCD     TIMER_IRQHandler          ; 18: Timer1
+                DCD     TIMER_IRQHandler          ; 19: Timer2
+                DCD     TIMER_IRQHandler          ; 20: Timer3
                 DCD     UART0_IRQHandler          ; 21: UART0
                 DCD     UART1_IRQHandler          ; 22: UART1
                 DCD     UART2_IRQHandler          ; 23: UART2
@@ -195,10 +195,10 @@ SysTick_Handler PROC
 Default_Handler PROC
 
                 EXPORT  WDT_IRQHandler            [WEAK]
-                EXPORT  TIMER0_IRQHandler         [WEAK]
-                EXPORT  TIMER1_IRQHandler         [WEAK]
-                EXPORT  TIMER2_IRQHandler         [WEAK]
-                EXPORT  TIMER3_IRQHandler         [WEAK]
+                EXPORT  TIMER_IRQHandler          [WEAK]
+                EXPORT  TIMER_IRQHandler          [WEAK]
+                EXPORT  TIMER_IRQHandler          [WEAK]
+                EXPORT  TIMER_IRQHandler          [WEAK]
                 EXPORT  UART0_IRQHandler          [WEAK]
                 EXPORT  UART1_IRQHandler          [WEAK]
                 EXPORT  UART2_IRQHandler          [WEAK]
@@ -231,10 +231,7 @@ Default_Handler PROC
 				EXPORT  CANActivity_IRQHandler    [WEAK]
 
 WDT_IRQHandler           
-TIMER0_IRQHandler         
-TIMER1_IRQHandler         
-TIMER2_IRQHandler         
-TIMER3_IRQHandler         
+TIMER_IRQHandler                 
 UART0_IRQHandler          
 UART1_IRQHandler          
 UART2_IRQHandler          

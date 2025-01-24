@@ -22,6 +22,11 @@ extern unsigned char led_value;
 
 #define N 6
 
+#define RIT_PERIOD_MS 50U
+// Button and Joystick deboucing time
+#define SHORT_PRESS_MS 300U
+#define LONG_PRESS_MS 1000U
+
 typedef enum {
 	STATE_IDLE,
 	STATE_RESET
